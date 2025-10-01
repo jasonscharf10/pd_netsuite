@@ -4,6 +4,7 @@ import streamlit as st
 from requests_oauthlib import OAuth1
 import os 
 import tempfile 
+import pandas as pd
 
 st.title("PandaDoc to NetSuite New Vendor Request")
 
