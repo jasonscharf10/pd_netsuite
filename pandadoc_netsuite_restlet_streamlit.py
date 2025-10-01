@@ -60,9 +60,74 @@ if pandadoc_doc_id:
 
     # Field mapping (as in prior code)
     field_id_to_value = {field["field_id"]: field["value"] for field in pandadoc_data.get("fields", [])}
-    PAYMENT_TERMS_ENUM = {"Net 15": "1", "Net 30": "1"}
+    PAYMENT_TERMS_ENUM = {"Net 15": "1", "Net 30": "2", "Due on Receipt": "4"}
     CURRENCY_ENUM = {"UAH": "6", "PLN": "7", "USD": "1"}
-    PAYMENT_METHOD_ENUM = {"ACH": "1", "Wire": "4"}
+    PAYMENT_METHOD_ENUM = {"ACH": "1", "Wire": "4", "Credit Card": "6"}
+    DEPARTMENT_ENUM = {
+    "CX - Professional Services - COGS": "2",
+    "HR - Shared": "6",
+    "(OLD) G&A Ops": "7",
+    "Marketing - Shared": "9",
+    "Product - Shared": "12",
+    "(OLD) Sales": "14",
+    "CX - Engineering": "121",
+    "Sales - Shared": "122",
+    "CX - Enablement": "123",
+    "Eng - Shared": "127",
+    "CX - Shared": "128",
+    "Balance Sheet": "130",
+    "(OLD) GTM Leadership": "131",
+    "Marketing - Acquisition": "132",
+    "(OLD) Revenue Marketing": "133",
+    "Marketing - Corporate": "134",
+    "Sales - Account Executive": "135",
+    "CX - Account Management": "136",
+    "Sales - Development": "137",
+    "CX - Customer Success": "138",
+    "CX - Customer Support - COGS": "139",
+    "Business Development": "140",
+    "(OLD) R&D Leadership": "141",
+    "Product - Ops": "142",
+    "Marketing - Product": "143",
+    "Product - Go Global": "144",
+    "Product - Management": "145",
+    "Product - UX": "146",
+    "Eng - COGS": "148",
+    "Executive": "149",
+    "Corp Dev": "150",
+    "HR - Talent Acquisition": "151",
+    "HR - Business Partners": "152",
+    "HR - People Operations": "153",
+    "HR - Training & Enablement": "154",
+    "HR - Facilities": "155",
+    "F&O - Shared": "156",
+    "Finance - Accounting": "157",
+    "Finance - FP&A": "158",
+    "RevOps": "159",
+    "Data": "160",
+    "IT & Security": "161",
+    "Finance - Legal": "162",
+    "F&O - COGS": "163",
+    "Benefits": "164",
+    "Non Operating": "331",
+    "Revenue": "332",
+    "Eng - Growth": "333",
+    "Eng - Tailored Solutions": "334",
+    "Eng - Application Services": "335",
+    "Eng - Infrastructure": "336",
+    "Eng - Solid Core": "337",
+    "Eng - Agile": "339",
+    "Eng - BizEng": "340",
+    "Development Software Capitalization": "341",
+    "Development Software Capitalization (COGS)": "342",
+    "Eng - Incubation": "344",
+    "Finance - Strategy Ops": "345",
+    "Eng - Customer Value": "354",
+    "Eng - Technology Hub": "355",
+    "Eng - Application Platform": "356",
+    "Eng - AI": "357",
+    "Eng - Document App": "358",
+}
     # CUSTOM_FORM_ENUM = {"PandaDoc United States- New Vendor Request Form": "45"}
     PANDADOC_TO_NETSUITE_FIELD_IDS = {
         "Text1": "custrecord_company_name",
@@ -74,6 +139,7 @@ if pandadoc_doc_id:
         "Dropdown1": "custrecord_vr_pref_pymt_method",
         "Text2": "custrecord_vr_tax_id",
         "Checkbox1": "custrecord_vr_1099",
+        "Dropdown3": "custrecord1530",
         # "Dropdown3": "customform"
     }
     for pd_field_id, ns_key in PANDADOC_TO_NETSUITE_FIELD_IDS.items():
@@ -84,12 +150,15 @@ if pandadoc_doc_id:
             val = CURRENCY_ENUM.get(val, "")
         elif ns_key == "custrecord_vr_pref_pymt_method":
             val = PAYMENT_METHOD_ENUM.get(val, "")
+        elif ns_key == "custrecord1530":
+            val = DEPARTMENT_ENUM.get(val, "")
         # elif ns_key == "customform":
         #     val = CUSTOM_FORM_ENUM.get(val, "")
         netsuite_payload[ns_key] = val
     # netsuite_payload["custrecord_vr_category"] = "1"
     # netsuite_payload["custrecord1553"] = "N/A"
-# Prepare preview rows
+
+    # Prepare preview rows
     preview_rows = []
     for pd_field_id, ns_key in PANDADOC_TO_NETSUITE_FIELD_IDS.items():
         value = field_id_to_value.get(pd_field_id, None)
@@ -112,6 +181,7 @@ if pandadoc_doc_id:
     preview_df = pd.DataFrame(preview_rows)
     st.write("### PandaDoc to NetSuite Mapping Preview")
     st.dataframe(preview_df, use_container_width=True)
+
     def fix_url(url):
         if not url or url.strip() == "":
             return None
@@ -136,7 +206,7 @@ if pandadoc_doc_id:
     payload.update(files_payload)  # Dynamically adds only present file fields
     print(f"Final RESTlet payload: {payload}")
 
-# Your RESTlet endpoint and NetSuite auth headers for RESTlet (NLAuth, Token-Based, or OAuth)
+    # Your RESTlet endpoint and NetSuite auth headers for RESTlet (NLAuth, Token-Based, or OAuth)
     restlet_url = "https://4454619-sb1.restlets.api.netsuite.com/app/site/hosting/restlet.nl?script=3116&deploy=1"
     ACCOUNT_ID = st.secrets["netsuite"]["account_id"]
     CONSUMER_KEY = st.secrets["netsuite"]["consumer_key"]
