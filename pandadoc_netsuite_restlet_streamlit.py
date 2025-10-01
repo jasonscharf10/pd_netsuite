@@ -86,7 +86,7 @@ if pandadoc_doc_id:
             val = PAYMENT_METHOD_ENUM.get(val, "")
         # elif ns_key == "customform":
         #     val = CUSTOM_FORM_ENUM.get(val, "")
-        # netsuite_payload[ns_key] = val
+        netsuite_payload[ns_key] = val
     # netsuite_payload["custrecord_vr_category"] = "1"
     # netsuite_payload["custrecord1553"] = "N/A"
 # Prepare preview rows
