@@ -62,6 +62,7 @@ if pandadoc_doc_id:
     PAYMENT_TERMS_ENUM = {"Net 15": "1", "Net 30": "1"}
     CURRENCY_ENUM = {"UAH": "6", "PLN": "7", "USD": "1"}
     PAYMENT_METHOD_ENUM = {"ACH": "1", "Wire": "4"}
+    CUSTOM_FORM_ENUM = {"PandaDoc United States- New Vendor Request Form": "45"}
     PANDADOC_TO_NETSUITE_FIELD_IDS = {
         "textf6b4f8c8-d871-4677-8191-eee20d5a7aa4_0": "custrecord_company_name",
         "textc7863c67-10bf-4925-bf64-af24ab6cdb13_0": "custrecord_vr_email",
@@ -71,6 +72,8 @@ if pandadoc_doc_id:
         "text6502c86f-0075-4e89-b884-e94198c0503e_0": "custrecord1531",
         "Dropdown1": "custrecord_vr_pref_pymt_method",
         "text5050dda5-1a8b-4074-8ee8-a9ea45efd147_0": "custrecord_vr_tax_id",
+        "Checkbox1": "custrecord_vr_1099",
+        "Dropdown3": "customform"
     }
     for pd_field_id, ns_key in PANDADOC_TO_NETSUITE_FIELD_IDS.items():
         val = field_id_to_value.get(pd_field_id, "")
@@ -80,6 +83,8 @@ if pandadoc_doc_id:
             val = CURRENCY_ENUM.get(val, "")
         elif ns_key == "custrecord_vr_pref_pymt_method":
             val = PAYMENT_METHOD_ENUM.get(val, "")
+        elif ns_key == "customform":
+            val = CUSTOM_FORM_ENUM.get(val, "")
         netsuite_payload[ns_key] = val
     netsuite_payload["custrecord_vr_category"] = "1"
     netsuite_payload["custrecord1553"] = "N/A"
