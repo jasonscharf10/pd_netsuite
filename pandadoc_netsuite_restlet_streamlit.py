@@ -165,7 +165,7 @@ if pandadoc_doc_id:
         netsuite_payload[ns_key] = val
     # netsuite_payload["custrecord_vr_category"] = "1"
     # netsuite_payload["custrecord1553"] = "N/A"
-    netsuite_payload["custrecord1530"] = "330"
+    netsuite_payload["custrecord1530"] = "331"
 
     # Prepare preview rows
     preview_rows = []
