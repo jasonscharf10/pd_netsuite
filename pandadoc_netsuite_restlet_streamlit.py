@@ -128,7 +128,7 @@ if pandadoc_doc_id:
     "Eng - AI": "357",
     "Eng - Document App": "358",
 }
-    # CUSTOM_FORM_ENUM = {"PandaDoc United States- New Vendor Request Form": "45"}
+    CUSTOM_FORM_ENUM = {"PandaDoc United States- New Vendor Request Form": "45"}
     PANDADOC_TO_NETSUITE_FIELD_IDS = {
         "Text1": "custrecord_company_name",
         "Text1_1_1": "custrecord_vr_email",
@@ -152,8 +152,8 @@ if pandadoc_doc_id:
             val = PAYMENT_METHOD_ENUM.get(val, "")
         elif ns_key == "custrecord1530":
             val = DEPARTMENT_ENUM.get(val, "")
-        # elif ns_key == "customform":
-        #     val = CUSTOM_FORM_ENUM.get(val, "")
+        elif ns_key == "customform":
+            val = CUSTOM_FORM_ENUM.get(val, "")
         netsuite_payload[ns_key] = val
     # netsuite_payload["custrecord_vr_category"] = "1"
     # netsuite_payload["custrecord1553"] = "N/A"
@@ -170,6 +170,10 @@ if pandadoc_doc_id:
             display_value = CURRENCY_ENUM.get(value, value)
         elif ns_key == "custrecord_vr_pref_pymt_method":
             display_value = PAYMENT_METHOD_ENUM.get(value, value)
+        elif ns_key == "custrecord1530":
+            display_value = DEPARTMENT_ENUM.get(value, value)
+        elif ns_key == "customform":
+            display_value = CUSTOM_FORM_ENUM.get(value, value)
         preview_rows.append({
             "PandaDoc Field ID": pd_field_id,
             "NetSuite Field": ns_key,
