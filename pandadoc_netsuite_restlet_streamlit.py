@@ -64,14 +64,14 @@ if pandadoc_doc_id:
     PAYMENT_METHOD_ENUM = {"ACH": "1", "Wire": "4"}
     CUSTOM_FORM_ENUM = {"PandaDoc United States- New Vendor Request Form": "45"}
     PANDADOC_TO_NETSUITE_FIELD_IDS = {
-        "textf6b4f8c8-d871-4677-8191-eee20d5a7aa4_0": "custrecord_company_name",
-        "textc7863c67-10bf-4925-bf64-af24ab6cdb13_0": "custrecord_vr_email",
-        "text57065e15-ff4b-4d43-8aec-674ac78cf20d_0": "custrecord_vr_website",
-        "textd64d795a-3f3d-43da-b6e5-c63d43a50cf8_0": "custrecord1524",
+        "Text1": "custrecord_company_name",
+        "Text1_1_1": "custrecord_vr_email",
+        "Text1_1_1_1": "custrecord_vr_website",
+        "Text1_1": "custrecord1524",
         "Dropdown2": "custrecord_vr_payment_terms",
-        "text6502c86f-0075-4e89-b884-e94198c0503e_0": "custrecord1531",
+        "Text3": "custrecord1531",
         "Dropdown1": "custrecord_vr_pref_pymt_method",
-        "text5050dda5-1a8b-4074-8ee8-a9ea45efd147_0": "custrecord_vr_tax_id",
+        "Text2": "custrecord_vr_tax_id",
         "Checkbox1": "custrecord_vr_1099",
         # "Dropdown3": "customform"
     }
