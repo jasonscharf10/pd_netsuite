@@ -88,7 +88,29 @@ if pandadoc_doc_id:
         # netsuite_payload[ns_key] = val
     # netsuite_payload["custrecord_vr_category"] = "1"
     # netsuite_payload["custrecord1553"] = "N/A"
+# Prepare preview rows
+    preview_rows = []
+    for pd_field_id, ns_key in PANDADOC_TO_NETSUITE_FIELD_IDS.items():
+        value = field_id_to_value.get(pd_field_id, None)
+        # If you have enum mapping logic for this key, map as your script does:
+        display_value = value
+        if ns_key == "custrecord_vr_payment_terms":
+            display_value = PAYMENT_TERMS_ENUM.get(value, value)
+        elif ns_key == "custrecord1531":
+            display_value = CURRENCY_ENUM.get(value, value)
+        elif ns_key == "custrecord_vr_pref_pymt_method":
+            display_value = PAYMENT_METHOD_ENUM.get(value, value)
+        preview_rows.append({
+            "PandaDoc Field ID": pd_field_id,
+            "NetSuite Field": ns_key,
+            "PandaDoc Value": value if value != None else "❌ Missing",
+            "Payload Value": display_value if display_value != None else "❌ Missing"
+        })
 
+    # Present as a nice dataframe
+    preview_df = pd.DataFrame(preview_rows)
+    st.write("### PandaDoc to NetSuite Mapping Preview")
+    st.dataframe(preview_df, use_container_width=True)
     def fix_url(url):
         if not url or url.strip() == "":
             return None
