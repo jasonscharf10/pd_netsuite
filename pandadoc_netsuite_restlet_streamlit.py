@@ -60,7 +60,7 @@ if pandadoc_doc_id:
 
     # Field mapping (as in prior code)
     field_id_to_value = {field["field_id"]: field["value"] for field in pandadoc_data.get("fields", [])}
-    PAYMENT_TERMS_ENUM = {"Net 15": "1", "Net 30": "2", "Due on Receipt": "4"}
+    PAYMENT_TERMS_ENUM = {"Net 15": "1", "Net 30": "2", "Due on receipt": "4"}
     CURRENCY_ENUM = {"UAH": "6", "PLN": "7", "USD": "1"}
     PAYMENT_METHOD_ENUM = {"ACH": "1", "Wire": "4", "Credit Card": "6"}
     DEPARTMENT_ENUM = {
@@ -129,6 +129,8 @@ if pandadoc_doc_id:
     "Eng - Document App": "358",
 }
     CUSTOM_FORM_ENUM = {"PandaDoc United States- New Vendor Request Form": "45"}
+    CATEGORY_ENUM = {"Contractor": "1", "IT Services": "2", "Others": "3", "Transactional": "4"}
+
     PANDADOC_TO_NETSUITE_FIELD_IDS = {
         "Text1": "custrecord_company_name",
         "Text1_1_1": "custrecord_vr_email",
@@ -139,8 +141,12 @@ if pandadoc_doc_id:
         "Dropdown1": "custrecord_vr_pref_pymt_method",
         "Text2": "custrecord_vr_tax_id",
         "Checkbox1": "custrecord_vr_1099",
-        "Dropdown3": "custrecord1530",
-        # "Dropdown3": "customform"
+        "Dropdown4": "custrecord1530",
+        "Dropdown3": "customform",
+        "Dropdown5": "custrecord_vr_category",
+        "Text5": "custrecord1553",
+        "Text6": "custrecord_vr_notes"
+
     }
     for pd_field_id, ns_key in PANDADOC_TO_NETSUITE_FIELD_IDS.items():
         val = field_id_to_value.get(pd_field_id, "")
@@ -154,6 +160,8 @@ if pandadoc_doc_id:
             val = DEPARTMENT_ENUM.get(val, "")
         elif ns_key == "customform":
             val = CUSTOM_FORM_ENUM.get(val, "")
+        elif ns_key == "custrecord_vr_category":
+            val = CATEGORY_ENUM.get(val, "")
         netsuite_payload[ns_key] = val
     # netsuite_payload["custrecord_vr_category"] = "1"
     # netsuite_payload["custrecord1553"] = "N/A"
