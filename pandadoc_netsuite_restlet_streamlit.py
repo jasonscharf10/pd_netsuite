@@ -62,7 +62,7 @@ if pandadoc_doc_id:
     PAYMENT_TERMS_ENUM = {"Net 15": "1", "Net 30": "1"}
     CURRENCY_ENUM = {"UAH": "6", "PLN": "7", "USD": "1"}
     PAYMENT_METHOD_ENUM = {"ACH": "1", "Wire": "4"}
-    CUSTOM_FORM_ENUM = {"PandaDoc United States- New Vendor Request Form": "45"}
+    # CUSTOM_FORM_ENUM = {"PandaDoc United States- New Vendor Request Form": "45"}
     PANDADOC_TO_NETSUITE_FIELD_IDS = {
         "Text1": "custrecord_company_name",
         "Text1_1_1": "custrecord_vr_email",
@@ -86,8 +86,8 @@ if pandadoc_doc_id:
         # elif ns_key == "customform":
         #     val = CUSTOM_FORM_ENUM.get(val, "")
         # netsuite_payload[ns_key] = val
-    netsuite_payload["custrecord_vr_category"] = "1"
-    netsuite_payload["custrecord1553"] = "N/A"
+    # netsuite_payload["custrecord_vr_category"] = "1"
+    # netsuite_payload["custrecord1553"] = "N/A"
 
     def fix_url(url):
         if not url or url.strip() == "":
