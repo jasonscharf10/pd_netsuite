@@ -185,6 +185,8 @@ if pandadoc_doc_id:
             display_value = DEPARTMENT_ENUM.get(value, value)
         elif ns_key == "customform":
             display_value = CUSTOM_FORM_ENUM.get(value, value)
+        elif ns_key == "custrecord_vr_category":
+            display_value = CATEGORY_ENUM.get(value, value)
         preview_rows.append({
             "PandaDoc Field ID": pd_field_id,
             "NetSuite Field": ns_key,
