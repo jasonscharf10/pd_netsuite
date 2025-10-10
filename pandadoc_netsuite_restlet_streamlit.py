@@ -5,7 +5,7 @@ from requests_oauthlib import OAuth1
 import os 
 import tempfile 
 import pandas as pd
-from constants import (
+from PandaDoc-NetSuite-Vendor-Onboarding.constants import (
     PAYMENT_TERMS_ENUM, CURRENCY_ENUM, PAYMENT_METHOD_ENUM, DEPARTMENT_ENUM, CUSTOM_FORM_ENUM, CATEGORY_ENUM,
 )
 st.title("PandaDoc to NetSuite New Vendor Request")
