@@ -268,7 +268,7 @@ if pandadoc_doc_id:
 
     # Package final RESTlet payload (only actual files included)
     payload = {
-        "folderid": "367946",
+        "folderid": "24102",
         "customrec_type": "customrecord_vendor_request",
         "otherfields": netsuite_payload,
     }
