@@ -281,7 +281,7 @@ if pandadoc_doc_id:
     print(f"Final RESTlet payload: {payload}")
 
     # Your RESTlet endpoint and NetSuite auth headers for RESTlet (NLAuth, Token-Based, or OAuth)
-    restlet_url = "https://4454619-sb1.restlets.api.netsuite.com/app/site/hosting/restlet.nl?script=3116&deploy=1"
+    restlet_url = "https://4454619-sb1.restlets.api.netsuite.com/app/site/hosting/restlet.nl?script=3128&deploy=1"
     ACCOUNT_ID = st.secrets["netsuite"]["account_id"]
     CONSUMER_KEY = st.secrets["netsuite"]["consumer_key"]
     CONSUMER_SECRET = st.secrets["netsuite"]["consumer_secret"]
