@@ -180,7 +180,7 @@ if pandadoc_doc_id:
         "Text3": "custrecord1531",
         "Dropdown1": "custrecord_vr_pref_pymt_method",
         "Text2": "custrecord_vr_tax_id",
-        "Checkbox1": "custrecord_vr_1099",
+        "Checkbox9": "custrecord_vr_1099",
         "Dropdown4": "custrecord1530",
         "Dropdown3": "customform",
         "Dropdown5": "custrecord_vr_category",
@@ -215,7 +215,7 @@ if pandadoc_doc_id:
         netsuite_payload[ns_key] = val
     # netsuite_payload["custrecord_vr_category"] = "1"
     # netsuite_payload["custrecord1553"] = "N/A"
-    netsuite_payload["custrecord1530"] = "331"
+    # netsuite_payload["custrecord1530"] = "331"
     #netsuite_payload["customform"] = "71"
 
     # Prepare preview rows
